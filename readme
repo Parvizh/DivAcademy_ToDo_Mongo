@@ -1,0 +1,51 @@
+1: npm init -y
+2: npm install typescript @types/node ts-node nodemon --save-dev
+3: npx tsc --init
+4:
+  {
+    "start": "node dist/src/app.js",
+    "build": "tsc",
+    "dev": "nodemon",
+  }
+5: Update tscoinfig
+6:
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "lib": [
+      "es6"
+    ],
+    "outDir": "./dist",
+    "rootDir": "./",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "typeRoots": [
+      "./src/@types",
+      "./node_modules/@types",
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+}
+
+7: create .env
+  {
+    MONGO_URI=
+    PORT=
+  }
+8: npm i reflect-metadata dotenv express cors mongoose 
+9: npm i @types/express  @types/cors --save-dev
+10: create config folder
+11: Create Mongo Cluster
