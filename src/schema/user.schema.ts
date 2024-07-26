@@ -1,27 +1,25 @@
-import { Schema, model } from "mongoose"
+import { Document, Schema, model } from "mongoose"
 import * as bcrypt from "bcryptjs"
 import { config } from "../config"
 
-interface IUser {
+export interface IUser extends Document {
     name: string
     surname: string
     password: string
     age: number
 }
 
-
 const userSchema = new Schema<IUser>({
     name: String,
     surname: String,
-    password: String,
+    password: { type: String, select: false },
     age: Number
-})
+}, { timestamps: true })
 
 userSchema.pre('save', function () {
     if (this.password) {
-        this.password = bcrypt.hashSync(this.password, config.password_salt)
+        this.password = bcrypt.hashSync(this.password, Number(config.password_salt))
     }
-    // next()
 })
 
 userSchema.virtual('fullname').get(function () {

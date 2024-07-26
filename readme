@@ -49,3 +49,10 @@
 9: npm i @types/express  @types/cors --save-dev
 10: create config folder
 11: Create Mongo Cluster
+
+12:npm i jsonwebtoken class-validator@^0.14.0 class-transformer@^0.5.1
+
+TIP:
+const searchQuery = searchText
+? { $or: [{ name: new RegExp(searchText as string, 'i') }, { surname: new RegExp(searchText as string, 'i') }] }
+: {};
