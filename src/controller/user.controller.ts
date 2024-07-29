@@ -5,7 +5,6 @@ class UserController extends CRUDController<IUser> {
     constructor() {
         super(User)
     }
-    
 }
 
 export default new UserController()

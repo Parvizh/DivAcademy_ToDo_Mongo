@@ -16,15 +16,16 @@ class AuthContoller {
     //     }
     //     return AuthContoller.instance;
     // }
+    
     async signup(req: Request, res: Response) {
         const { name, surname, password, age } = req.body;
         const isUserExist = await User.findOne({ name })
         if (isUserExist) {
-            errorHandler(res, 401, "This user name already exist")
+            return errorHandler(res, 401, "This user name already exist")
         }
         const user = await User.create({ name, surname, password, age })
         const jwt = this.jwtTokenGenerator(user);
-        res.status(201).json({ user, jwt })
+        return res.status(201).json({ user, jwt })
     }
 
     private jwtTokenGenerator(user: IUser) {
