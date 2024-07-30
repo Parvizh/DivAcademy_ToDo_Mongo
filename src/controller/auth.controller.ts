@@ -30,7 +30,7 @@ class AuthContoller {
 
     private jwtTokenGenerator(user: IUser) {
         const payload: JwtPayloadDto = {
-            id: user._id as string,
+            id: user.id,
             name: user.name
         }
         const jwtToken = jwt.sign(payload, config.jwt_secret_key)

@@ -1,18 +1,19 @@
 import { Router } from "express";
 import userController from "../controller/user.controller";
-import { bodyDtoValidationMiddleware, queryDtoValidationMiddleware } from "../validations/dto.validation";
+import { dtoValidationMiddleware } from "../validations/dto.validation";
 import { CreateUserDto } from "../dto/user/user.create.dto";
 import { UpdateUserDto } from "../dto/user/user.update.dto";
 import { QueryDto } from "../dto/query.dto";
+import { REQ_TYPE } from "../enums/req.enum";
 
 const router = Router()
 
-router.post('/', bodyDtoValidationMiddleware(CreateUserDto), (req, res) => {
+router.post('/', dtoValidationMiddleware(CreateUserDto, REQ_TYPE.BODY), (req, res) => {
     const result = userController.create(req, res)
     return result;
 })
 
-router.put('/:id', bodyDtoValidationMiddleware(UpdateUserDto),(req, res) => {
+router.put('/:id', dtoValidationMiddleware(UpdateUserDto, REQ_TYPE.BODY), (req, res) => {
     const result = userController.update(req, res)
     return result;
 })
@@ -27,7 +28,7 @@ router.get('/:id', (req, res) => {
     return result;
 })
 
-router.get('/',queryDtoValidationMiddleware(QueryDto), (req, res) => {
+router.get('/', dtoValidationMiddleware(QueryDto, REQ_TYPE.QUERY), (req, res) => {
     const result = userController.find(req, res)
     return result;
 })

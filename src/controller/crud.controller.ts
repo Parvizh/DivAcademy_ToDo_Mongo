@@ -4,7 +4,7 @@ import { errorHandler } from "../helpers/errorHandler";
 import { SORT_TYPE } from "../enums/sort.enum";
 import { QueryDto } from "../dto/query.dto";
 
-export abstract class CRUDController<T extends Document> {
+export class CRUDController<T extends Document> {
     public model: Model<T>;
 
     constructor(model: Model<T>) {
