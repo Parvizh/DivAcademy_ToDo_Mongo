@@ -7,12 +7,12 @@ export class QueryDto {
     @IsOptional()
     @Transform(({ value }) => (value === 'null' || value == '' ? 1 : Number(value)))
     @IsNumber()
-    page: number;
+    page: number = 1;
 
     @IsOptional()
     @Transform(({ value }) => (value === 'null' || value == '' ? 10 : Number(value)))
     @IsNumber()
-    limit: number;
+    limit: number = 10;
 
     @IsOptional()
     @IsString()

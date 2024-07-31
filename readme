@@ -1,15 +1,13 @@
 1: npm init -y
 2: npm install typescript @types/node ts-node nodemon --save-dev
 3: npx tsc --init
-4:
-  {
-    "start": "node dist/src/app.js",
-    "build": "tsc",
-    "dev": "nodemon",
-  }
+4: {
+  "start": "node dist/src/app.js",
+  "build": "tsc",
+  "dev": "nodemon",
+}
 5: Update tscoinfig
-6:
-{
+6: {
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
@@ -44,7 +42,7 @@
   {
     MONGO_URI=
     PORT=
-  }
+}
 8: npm i reflect-metadata dotenv express cors mongoose 
 9: npm i @types/express  @types/cors --save-dev
 10: create config folder
@@ -54,5 +52,13 @@
 
 TIP:
 const searchQuery = searchText
-? { $or: [{ name: new RegExp(searchText as string, 'i') }, { surname: new RegExp(searchText as string, 'i') }] }
+? { $or: [
+    { name: new RegExp(searchText as string, 'i')
+    },
+    { surname: new RegExp(searchText as string, 'i')
+    }
+  ]
+}
 : {};
+
+13: install "@types/multer": "^1.4.11""multer": "^1.4.5-lts.1",

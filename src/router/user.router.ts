@@ -24,7 +24,7 @@ router.delete('/:id', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    const result = userController.findById(req, res)
+    const result = userController.findOne(req, res)
     return result;
 })
 
