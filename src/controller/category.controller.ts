@@ -1,4 +1,4 @@
-import { FilterQuery, PipelineStage, Schema } from "mongoose";
+import { FilterQuery } from "mongoose";
 import { errorHandler } from "../helpers/errorHandler";
 import { Category, ICategory } from "../schema/category.schema";
 import { CRUDController } from "./crud.controller";
@@ -61,9 +61,6 @@ class CategoryController extends CRUDController<ICategory> {
             return errorHandler(res, 403, "This user doesnt have access to modify this category")
         }
     }
-
-
-
 }
 
 

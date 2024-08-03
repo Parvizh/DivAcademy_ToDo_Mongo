@@ -4,11 +4,13 @@ import { CRUDController } from "./crud.controller";
 import { PipelineStage } from "mongoose";
 
 class NoteController extends CRUDController<INote> {
-    whereConditionFindAll(searchText: string) {
-        throw new Error("Method not implemented.");
-    }
+
     constructor() {
         super(Note)
+    }
+
+    whereConditionFindAll(searchText: string) {
+        return null;
     }
 
     selectFindAll() {
@@ -16,9 +18,7 @@ class NoteController extends CRUDController<INote> {
     }
 
 
-    beforeUpdate(data: INote, req: Request, res: Response) {
-
-    }
+    beforeUpdate(data: INote, req: Request, res: Response) { }
 
     async findAllGroupByCategory(req: Request, res: Response) {
         const pipeline: PipelineStage[] = [

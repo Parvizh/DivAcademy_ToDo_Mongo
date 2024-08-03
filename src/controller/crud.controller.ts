@@ -1,4 +1,4 @@
-import { Document, Model } from "mongoose";
+import { Document, FilterQuery, Model } from "mongoose";
 import { Request, Response } from "express"
 import { errorHandler } from "../helpers/errorHandler";
 import { SORT_TYPE } from "../enums/sort.enum";
@@ -73,7 +73,7 @@ export abstract class CRUDController<T extends Document> {
             if (!result) return errorHandler(res, 404, "This data is not found")
 
             await this.beforeUpdate(result, req, res)
-            
+
             if (!res.headersSent) {
                 result = Object.assign(result, req.body)
                 const data = await result.save()
@@ -96,13 +96,13 @@ export abstract class CRUDController<T extends Document> {
         }
     }
 
-    abstract whereConditionFindAll(searchText: string)
     populateFindAll() {
         return null
     }
 
-    abstract beforeUpdate(data: T, req: Request, res: Response)
-    abstract selectFindAll()
+    abstract whereConditionFindAll(searchText: string): FilterQuery<T>
+    abstract selectFindAll(): string
+    abstract beforeUpdate(data: T, req: Request, res: Response): Promise<void>
 
 
     async _findById(id: string): Promise<T | Error> {
