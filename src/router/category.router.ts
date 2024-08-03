@@ -30,6 +30,7 @@ router.post(
 
 router.put(
     '/:id',
+    authMiddleware,
     dtoValidationMiddleware(UpdateCategoryDto, REQ_TYPE.BODY),
     (req, res) => {
         const result = categoryController.update(req, res)
@@ -38,6 +39,7 @@ router.put(
 
 router.delete(
     '/:id',
+    authMiddleware,
     (req, res) => {
         const result = categoryController.delete(req, res)
         return result;

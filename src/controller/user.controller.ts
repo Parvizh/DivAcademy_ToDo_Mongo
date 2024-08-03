@@ -1,6 +1,9 @@
 import { FilterQuery } from "mongoose";
 import { IUser, User } from "../schema/user.schema";
 import { CRUDController } from "./crud.controller";
+import { Request, Response } from "express";
+import { ParamsDictionary } from "express-serve-static-core";
+import { ParsedQs } from "qs";
 
 class UserController extends CRUDController<IUser> {
     constructor() {
@@ -22,6 +25,12 @@ class UserController extends CRUDController<IUser> {
     selectFindAll() {
         return "name surname"
     }
+
+    beforeUpdate(data: IUser, req: Request, res: Response) {
+        
+    }
+
+  
 }
 
 export default new UserController()

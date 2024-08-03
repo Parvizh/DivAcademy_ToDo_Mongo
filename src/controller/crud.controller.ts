@@ -42,6 +42,7 @@ export abstract class CRUDController<T extends Document> {
             const resultPromise = this.model
                 .find(this.whereConditionFindAll(searchText as string))
                 .sort(sort ? { [sort as string]: orderParser } : {})
+                .populate(this.populateFindAll())
                 .select(this.selectFindAll())
                 .skip(skip)
                 .limit(Number(limit))
@@ -67,9 +68,19 @@ export abstract class CRUDController<T extends Document> {
 
     async update(req: Request, res: Response) {
         try {
-            const result = await this.model.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            // const result = await this.model.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            let result: T = await this.model.findById(req.params.id)
             if (!result) return errorHandler(res, 404, "This data is not found")
-            return res.status(200).json({ result })
+
+            await this.beforeUpdate(result, req, res)
+            
+            if (!res.headersSent) {
+                result = Object.assign(result, req.body)
+                const data = await result.save()
+
+                return res.status(200).json({ result: data })
+
+            }
         } catch (error: any) {
             return errorHandler(res, 500, error.message)
         }
@@ -86,13 +97,18 @@ export abstract class CRUDController<T extends Document> {
     }
 
     abstract whereConditionFindAll(searchText: string)
+    populateFindAll() {
+        return null
+    }
 
+    abstract beforeUpdate(data: T, req: Request, res: Response)
     abstract selectFindAll()
+
 
     async _findById(id: string): Promise<T | Error> {
         try {
             const result: T = await this.model.findById(id)
-            if (!result) new Error("This data is not found")
+            if (!result) return new Error("This data is not found")
             return result
         } catch (error: any) {
             return new Error(error.message)
