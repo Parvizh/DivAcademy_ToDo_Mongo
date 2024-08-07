@@ -7,6 +7,7 @@ import router from "./router"
 import path from "path";
 import { errorHandler } from "./helpers/errorHandler";
 import { FILE_ERROR } from "./constants/errorMessage";
+import { AppDataSource } from "./config/sql.config";
 
 const app = express();
 
@@ -29,7 +30,11 @@ app.use('*', (_req: Request, res: Response) => {
 
 mongoInitialConnection()
 
-const port = config.port
-app.listen(port, () => {
-    console.log(`Server running on port: ${port}`);
-});
+AppDataSource.initialize().then(() => {
+    const port = config.port
+    app.listen(port, () => {
+        console.log(`Server running on port: ${port}`);
+    });
+}).catch((error) => {
+    console.log("There is some error in your connection: ", error)
+})

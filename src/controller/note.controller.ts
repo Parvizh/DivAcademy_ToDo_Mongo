@@ -18,7 +18,7 @@ class NoteController extends CRUDController<INote> {
     }
 
 
-    beforeUpdate(data: INote, req: Request, res: Response) { }
+    async beforeUpdate(data: INote, req: Request, res: Response) { }
 
     async findAllGroupByCategory(req: Request, res: Response) {
         const pipeline: PipelineStage[] = [
