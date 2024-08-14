@@ -1,5 +1,5 @@
 import { Router } from "express";
-import noteController from "../controller/note.controller";
+import noteController from "../controller/mongoose/note.controller";
 
 const router = Router()
 

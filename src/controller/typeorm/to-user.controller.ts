@@ -28,7 +28,7 @@ class TOUserController extends TOCRUDController<UserEntity> {
         return ['name', 'surname', 'age']
     }
 
-    // async beforeUpdate(data: IUser, req: Request, res: Response) { }
+    async beforeUpdate(data: UserEntity, req: Request, res: Response) { }
 
 
 }

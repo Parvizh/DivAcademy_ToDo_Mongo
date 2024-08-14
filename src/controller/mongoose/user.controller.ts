@@ -1,7 +1,8 @@
 import { FilterQuery } from "mongoose";
-import { IUser, User } from "../schema/user.schema";
-import { CRUDController } from "./crud.controller";
+import { IUser, User } from "../../schema/user.schema";
+import { CRUDController } from "../mongoose/crud.controller";
 import { Request, Response } from "express";
+
 class UserController extends CRUDController<IUser> {
     constructor() {
         super(User)

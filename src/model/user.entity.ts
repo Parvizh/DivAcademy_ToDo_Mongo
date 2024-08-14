@@ -1,10 +1,10 @@
 import { BeforeInsert, Column, Entity } from "typeorm";
 import * as bcrypt from "bcryptjs"
 import { config } from "../config";
-import { BaseEntity } from "./base-entity";
+import { CommonEntity } from "./base-entity";
 
 @Entity('users')
-export class UserEntity extends BaseEntity {
+export class UserEntity extends CommonEntity {
     @Column({ type: 'varchar', name: 'name', nullable: false })
     name: string
 

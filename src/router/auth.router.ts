@@ -1,5 +1,5 @@
 import { Router } from "express";
-import authController from "../controller/auth.controller";
+import authController from "../controller/mongoose/auth.controller";
 
 const router = Router()
 

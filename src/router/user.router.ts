@@ -1,5 +1,4 @@
 import { Router } from "express";
-import userController from "../controller/user.controller";
 import { dtoValidationMiddleware } from "../validations/dto.validation";
 import { CreateUserDto } from "../dto/user/user.create.dto";
 import { UpdateUserDto } from "../dto/user/user.update.dto";
@@ -15,12 +14,12 @@ router.post('/', dtoValidationMiddleware(CreateUserDto, REQ_TYPE.BODY), (req, re
 })
 
 router.put('/:id', dtoValidationMiddleware(UpdateUserDto, REQ_TYPE.BODY), (req, res) => {
-    const result = userController.update(req, res)
+    const result = toUserController.update(req, res)
     return result;
 })
 
 router.delete('/:id', (req, res) => {
-    const result = userController.delete(req, res)
+    const result = toUserController.delete(req, res)
     return result;
 })
 

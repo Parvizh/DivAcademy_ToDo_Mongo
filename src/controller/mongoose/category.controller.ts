@@ -1,6 +1,6 @@
 import { FilterQuery } from "mongoose";
-import { errorHandler } from "../helpers/errorHandler";
-import { Category, ICategory } from "../schema/category.schema";
+import { errorHandler } from "../../helpers/errorHandler";
+import { Category, ICategory } from "../../schema/category.schema";
 import { CRUDController } from "./crud.controller";
 import { Request, Response } from "express";
 

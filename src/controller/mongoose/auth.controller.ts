@@ -1,9 +1,9 @@
 import { Request, Response } from "express"
-import { IUser, User } from "../schema/user.schema";
-import jwt, { JwtPayload } from "jsonwebtoken"
-import { JwtPayloadDto } from "../dto/jwtPayload.dto";
-import { config } from "../config";
-import { errorHandler } from "../helpers/errorHandler";
+import { IUser, User } from "../../schema/user.schema";
+import jwt from "jsonwebtoken"
+import { JwtPayloadDto } from "../../dto/jwtPayload.dto";
+import { config } from "../../config";
+import { errorHandler } from "../../helpers/errorHandler";
 
 class AuthContoller {
     //Singleton design pattern

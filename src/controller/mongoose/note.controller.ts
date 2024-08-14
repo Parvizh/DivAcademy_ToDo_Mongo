@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { INote, Note } from "../schema/note.schema";
+import { INote, Note } from "../../schema/note.schema";
 import { CRUDController } from "./crud.controller";
 import { PipelineStage } from "mongoose";
 

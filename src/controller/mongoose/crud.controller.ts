@@ -1,7 +1,7 @@
 import { Document, FilterQuery, Model } from "mongoose";
 import { Request, Response } from "express"
-import { errorHandler } from "../helpers/errorHandler";
-import { SORT_TYPE } from "../enums/sort.enum";
+import { errorHandler } from "../../helpers/errorHandler";
+import { SORT_TYPE } from "../../enums/sort.enum";
 
 export abstract class CRUDController<T extends Document> {
     public model: Model<T>;

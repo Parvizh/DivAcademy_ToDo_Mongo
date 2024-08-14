@@ -1,8 +1,7 @@
 import { Request, Response } from "express"
 import { errorHandler } from "../../helpers/errorHandler";
 import { SORT_TYPE } from "../../enums/sort.enum";
-import { BaseEntity } from "../../model/base-entity";
-import { FindOneOptions, FindOptionsOrder, FindOptionsWhere, Repository } from "typeorm";
+import { BaseEntity, FindOneOptions, FindOptionsOrder, FindOptionsWhere, Repository } from "typeorm";
 
 export abstract class TOCRUDController<T extends BaseEntity> {
     public repository: Repository<T>;
@@ -62,35 +61,33 @@ export abstract class TOCRUDController<T extends BaseEntity> {
         }
     }
 
-    // async update(req: Request, res: Response) {
-    //     try {
-    //         // const result = await this.model.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    //         let result: T = await this.model.findById(req.params.id)
-    //         if (!result) return errorHandler(res, 404, "This data is not found")
+    async update(req: Request, res: Response) {
+        try {
+         let updatedData : T = await this.repository.findOne({where : {id: +req.params.id} as object})
+         if (!updatedData) return errorHandler(res,404,'Not Found')
 
-    //         await this.beforeUpdate(result, req, res)
+            
+        await this.beforeUpdate(updatedData, req, res)
+        if(!res.headersSent) {
+        updatedData = Object.assign(updatedData, req.body)
+        updatedData = await updatedData.save()
+        }
+         return res.status(200).json({ result: updatedData })
+        } catch (error: any) {
+            return errorHandler(res, 500, error.message)
+        }
+    }
 
-    //         if (!res.headersSent) {
-    //             result = Object.assign(result, req.body)
-    //             const data = await result.save()
-
-    //             return res.status(200).json({ result: data })
-
-    //         }
-    //     } catch (error: any) {
-    //         return errorHandler(res, 500, error.message)
-    //     }
-    // }
-
-    // async delete(req: Request, res: Response) {
-    //     try {
-    //         const result = await this.model.findByIdAndDelete(req.params.id);
-    //         if (!result) return errorHandler(res, 404, "This data is not found")
-    //         return res.status(201).json({ result })
-    //     } catch (error: any) {
-    //         return errorHandler(res, 500, error.message)
-    //     }
-    // }
+    async delete(req: Request, res: Response) {
+        try {
+            let data: T = await this.repository.findOne({where: {id: +req.params.id} as object})
+            if(!data) return errorHandler(res, 404, 'Not Found')
+            await data.remove()
+            res.status(200).json({message: 'Deleted'})
+        } catch (error: any) {
+            return errorHandler(res, 500, error.message)
+        }
+    }
 
     relationFindAll() {
         return null
@@ -98,7 +95,7 @@ export abstract class TOCRUDController<T extends BaseEntity> {
 
     abstract whereConditionFindAll(searchText: string)
     abstract selectFindAll(): (keyof T)[]
-    // abstract beforeUpdate(data: T, req: Request, res: Response): Promise<void>
+    abstract beforeUpdate(data: T, req: Request, res: Response): Promise<void>
 
 
     // async _findById(id: string): Promise<T | Error> {

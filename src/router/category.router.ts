@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import categoryController from "../controller/category.controller";
+import categoryController from "../controller/mongoose/category.controller";
 import { dtoValidationMiddleware } from "../validations/dto.validation";
 import { QueryDto } from "../dto/query.dto";
 import { REQ_TYPE } from "../enums/req.enum";
