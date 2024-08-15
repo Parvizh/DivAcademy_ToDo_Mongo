@@ -1,10 +1,10 @@
 import { Router } from "express";
-import authController from "../controller/mongoose/auth.controller";
+import { signup } from "../controller/auth.controller";
 
 const router = Router()
 
 router.post('/signup', (req, res) => {
-    const result = authController.signup(req, res)
+    const result = signup(req, res)
     return result;
 })
 

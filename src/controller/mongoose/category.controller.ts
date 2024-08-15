@@ -57,7 +57,7 @@ class CategoryController extends CRUDController<ICategory> {
     }
 
     async beforeUpdate(data: ICategory, req: Request, res: Response) {
-        if (data.userId.toString() !== "66a8b41a6973f9a9c57d1c47") {
+        if (data.userId.toString() !== req.params.id) {
             return errorHandler(res, 403, "This user doesnt have access to modify this category")
         }
     }
